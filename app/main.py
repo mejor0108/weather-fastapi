@@ -1,8 +1,11 @@
 from typing import Union
-
-
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from routers.weather import route_weather
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 
@@ -14,4 +17,13 @@ async def health_check():
 
 @app.get("/")
 async def read_root():
-    return {"Hello": "World"}
+    return JSONResponse({"Hello": "World"})
+
+
+app.include_router(route_weather)
+
+
+
+          
+
+    
